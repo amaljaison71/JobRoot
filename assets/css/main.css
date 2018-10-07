@@ -3832,10 +3832,10 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#727c7a', end
 
 		}
 
-		
+
 /* card */
 
-	.card 
+	.card
 	{
 		text-align: center;
 		box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
@@ -3844,14 +3844,14 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#727c7a', end
 		border-radius: 5px;
 	}
 
-	.card:hover 
+	.card:hover
 	{
 		box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
 		background-color: #f91747;
 		color:white;
 	}
-	
-	.job_list_card 
+
+	.job_list_card
 	{
 		text-align: center;
 		box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
@@ -3860,15 +3860,15 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#727c7a', end
 		border-radius: 5px;
 	}
 
-	.job_list_card:hover 
+	.job_list_card:hover
 	{
 		box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
 		background-color: #f91747;
 		color:white;
 	}
-	
+
 /* Profile Menu */
-	
+
 	.profile-wrapper {
 	position:relative;
 	display: inline-block;
@@ -3885,7 +3885,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#727c7a', end
 		clear:both;
 		margin:20px 0 0 0;
 	}
-	
+
 
 	/* hover profile show menu */
 	.profile-wrapper:hover .menu {
@@ -3893,3 +3893,32 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#727c7a', end
 		cursor:pointer;
 		background:#ffffff;
 	}
+
+	/* job list card */
+
+	.alert {
+    padding: 20px;
+    background-color: white;
+    color: #f91747;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    margin-top: 4px
+}
+
+.alert:hover {
+    box-shadow: 0 11px 18px 0 rgba(0,0,0,0.2);
+}
+
+.closebtn {
+    margin-left: 15px;
+    color: #f91747;
+    font-weight: bold;
+    float: right;
+    font-size: 22px;
+    line-height: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.closebtn:hover {
+    color: black;
+}
