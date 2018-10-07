@@ -12,6 +12,7 @@
 		$emp=mysqli_query($con,$sql) or die('Error in the sql query1');
 		$row=mysqli_fetch_row($emp);
 		$empid=$row[0];
+		$_SESSION['empid'] = $empid;
 
 		/* Retrieve values from jobs table */
 		$sql="select * from jobs where empid='".$empid."'";

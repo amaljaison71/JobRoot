@@ -1,34 +1,38 @@
 <?php
-
+	session_start();
 	/* Database connectivity for employer registration */
 
 	$con=mysqli_connect("localhost","root","");
 	$db=mysqli_select_db($con,"jobroot")or die('Error connecting to MySQL table.');
+	$sql="select empid from employer where email='".$_SESSION['email']."'";
+	$emp=mysqli_query($con,$sql) or die('Error in the sql query1');
+	$row=mysqli_fetch_row($emp);
+	$empid=$row[0];
 
-	/* Fetching values from the registration form */
-	$cname=$_POST['cname'];
-	$cin=$_POST['cin'];
-	$category=$_POST['category'];
-	$location=$_POST['location'];
-	$email=$_POST['email'];
-	$website=$_POST['website'];
-	$phone=$_POST['phone'];
-	$password=$_POST['password1'];
-	$description=$_POST['description'];
+	/* Retrieve values from employer table */
+	$sql="select * from employer where empid='".$empid."' ";
+	$employer=mysqli_query($con,$sql) or die('Error in the sql query2');
+	$row=mysqli_fetch_row($employer);
 
-	/* Inserting values into employer table */
-	$sql="insert into employer(cname,cin,holoc,email,phone,category,website,about) values('$cname','$cin','$location','$email','$phone','$category','$website','$description')" ;
-	$res=mysqli_query($con,$sql) or die('Error in the sql query1');
+	if ($_SERVER['REQUEST_METHOD'] == 'POST')
+	{
+		/* Fetching values from the registration form */
+		$cname=$_POST['cname'];
+		$cin=$_POST['cin'];
+		$category=$_POST['category'];
+		$location=$_POST['location'];
+		$email=$_POST['email'];
+		$website=$_POST['website'];
+		$phone=$_POST['phone'];
+		$description=$_POST['description'];
 
-	/* Inserting values into login table */
-	$sql="insert into login(email,password,role) values('$email','$password',2)";
-	$res=mysqli_query($con,$sql)or die('Error in the sql query2');
+		/* Update values into employer table */
+		$sql="update employer set cname='$cname', cin='$cin', holoc='$location', email='$email', phone='$phone', category='$category', website='$website', about='$description' where empid='".$empid."'";
+		$res=mysqli_query($con,$sql) or die('Error in the sql query3');
+	}
 
 	/* Close db connection */
 	mysqli_close($con);
-
-	/* Show employer's home page */
-	include("index.html");
 ?>
 
 <!DOCTYPE HTML>
@@ -62,9 +66,9 @@
 				<!-- Nav -->
 					<nav id="nav">
 						<ul>
-							<li><a href="employer_home.html">Home</a></li>
-							<li><a href="#">Post Jobs</a></li>
-							<li><a href="#">Edit Jobs</a></li>
+							<li><a href="employer_home.php">Home</a></li>
+							<li><a href="employer_post_job.php">Post Jobs</a></li>
+							<li><a href="employer_edit_job.php">Edit Jobs</a></li>
 							<li><a href="#">Applied Candidates</a></li>
 							<li>
 								<ul class="profile-wrapper">
@@ -99,19 +103,19 @@
 <!-- Form -->
 									<section>
 										<h2>Employer Details </h2>
-										<form method="post" action="employer_registration.php" enctype="multipart/form-data">
+										<form method="post" action="#" enctype="multipart/form-data">
 											<div class="row gtr-uniform">
 
 														<div class="col-6 col-12-xsmall">
-															<input type="text" name="cname" id="cname" value="" placeholder="Company name" />
+															<input type="text" name="cname" id="cname" value="<?php echo $row[1]; ?>" placeholder="Company name" />
 														</div>
 
 														<div class="col-6 col-12-xsmall">
-															<input type="text" name="cin" id="cin" value="" placeholder="CompanyIN" />
+															<input type="text" name="cin" id="cin" value="<?php echo $row[2]; ?>" placeholder="CompanyIN" />
 														</div>
 
 														<div class="col-12">
-															<select name="category" id="category">
+															<select name="category" id="category" value="<?php echo $row[6]; ?>">
 																<option value="">- Category -</option>
 																<option value="Information Technology">Information Technology</option>
 																<option value="Networking">Networking</option>
@@ -123,7 +127,7 @@
 
 
 														<div class="col-12">
-															<select name="location" value=""  >
+															<select name="location" value="<?php echo $row[3]; ?>"  >
 																<option selected="selected">-Head Office Location-</option>
 																<option disabled="disabled" style="background-color:#f2efef"><font color="#000000"><i>-Top Metropolitan Cities-</i></font></option>
 																<option value="Ahmedabad">Ahmedabad</option>
@@ -362,25 +366,25 @@
 
 
 												<div class="col-6 col-12-xsmall">
-													<input type="email" name="email" id="email" value="" placeholder="Email" />
+													<input type="email" name="email" id="email" value="<?php echo $row[4]; ?>" placeholder="Email" />
 												</div>
 
 												<div class="col-6 col-12-xsmall">
-													<input type="url" name="website" id="website" value="" placeholder="Website" />
+													<input type="url" name="website" id="website" value="<?php echo $row[7]; ?>" placeholder="Website" />
 												</div>
 
 
 
 												<div class="col-12">
-													<input type="number" name="phone" id="phone" value="" placeholder="Phone" />
+													<input type="number" name="phone" id="phone" value="<?php echo $row[5]; ?>" placeholder="Phone" />
 												</div>
 
 												<div class="col-12">
-													<textarea name="description" id="description" placeholder="Description" rows="6"></textarea>
+													<textarea name="description" id="description" placeholder="Description" rows="6"><?php echo $row[8]; ?></textarea>
 												</div>
 												<div class="col-12">
 													<ul class="actions">
-														<li><input type="submit" value="Submit" class="primary" /></li>
+														<li><input type="submit" value="Update" class="primary" /></li>
 
 													</ul>
 												</div>

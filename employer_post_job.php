@@ -75,7 +75,7 @@
 											<ul class="menu">
 												<li><a href="employer_edit_profile.php">Edit</a></li>
 												<li><a href="#">Change Password</a></li>
-												<li><a href="#">Logout</a></li>
+												<li><a href="index.html">Logout</a></li>
 											</ul>
 										</div>
 									</li>
