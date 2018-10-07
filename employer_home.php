@@ -3,6 +3,7 @@
 	/* Database connectivity for employer registration */
 	if ($_SERVER['REQUEST_METHOD'] == 'GET')
 	{
+	  
 		$con=mysqli_connect("localhost","root","");
 		$db=mysqli_select_db($con,"jobroot")or die('Error connecting to MySQL table.');
 		$email=$_SESSION['email'];

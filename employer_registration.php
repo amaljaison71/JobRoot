@@ -1,11 +1,8 @@
 <?php
-	
-	/* Database connectivity for employer registration */
-	
-	$con=mysqli_connect("localhost","root","");
-	$db=mysqli_select_db($con,"jobroot")or die('Error connecting to MySQL table.');
-	
 	/* Fetching values from the registration form */
+	include('DBCon/DBConnection.php');
+	$db=new DBCon();
+
 	$cname=$_POST['cname'];
 	$cin=$_POST['cin'];
 	$category=$_POST['category'];
@@ -16,17 +13,9 @@
 	$password=$_POST['password1'];
 	$description=$_POST['description'];	
 	
-	/* Inserting values into employer table */
-	$sql="insert into employer(cname,cin,holoc,email,phone,category,website,about) values('$cname','$cin','$location','$email','$phone','$category','$website','$description')" ;
-	$res=mysqli_query($con,$sql) or die('Error in the sql query1'); 
-	
-	/* Inserting values into login table */
-	$sql="insert into login(email,password,role) values('$email','$password',2)";
-	$res=mysqli_query($con,$sql)or die('Error in the sql query2');
-	
-	/* Close db connection */
-	mysqli_close($con);
+	$res=$db->employerReg($cname,$cin,$location,$email,$phone,$category,$website,$description,$password);
 	
 	/* Show employer's home page */
-	include("index.html");
+	// res contins the number of affected rows . res==0 means no rows affected
+	$res>0?header('location:login.php'):header('location:employer_registration.html');
 ?>
