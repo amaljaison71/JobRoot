@@ -1,14 +1,27 @@
 <?PHP
   session_start();
 
+  /* Database connectivity for employer registration */
+
+  $con=mysqli_connect("localhost","root","");
+  $db=mysqli_select_db($con,"jobroot")or die('Error connecting to MySQL table.');
+  $email=$_SESSION['email'];
+
+  /* Load values into form upon change in select */
+
+  $sql="select title from jobs where empid=(select empid from employer where email='".$email."')";
+  $job_title=mysqli_query($con,$sql) or die('Error in the sql query1');
+
+  /* Load values into form upon change in select */
+
+  function onSelectionChane()
+  {
+    $sql="select * from jobs where empid=(select empid from employer where email='".$email."')";
+		$jobs=mysqli_query($con,$sql) or die('Error in the sql query2');
+  }
+
   if ($_SERVER['REQUEST_METHOD'] == 'POST')
 	{
-    /* Database connectivity for employer registration */
-
-    $con=mysqli_connect("localhost","root","");
-    $db=mysqli_select_db($con,"jobroot")or die('Error connecting to MySQL table.');
-    $email=$_SESSION['email'];
-
     /* Fetching values from the registration form */
     $title=$_POST['job_title'];
     $type=$_POST['job_type'];
@@ -93,7 +106,11 @@
 								<form method="post" action="#">
 									<div class="row gtr-uniform">
 										<div class="col-12">
-											<input type="text" name="job_title" id="job_title" placeholder="Job Title">
+                      <select name="job_title" value=""  >
+                        <?php
+
+                        ?>
+											</select>
 										</div>
 										<div class="col-4 col-12-small">
 											<input type="radio" id="full_time" name="job_type" value="Full Time" checked>

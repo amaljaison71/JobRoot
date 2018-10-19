@@ -161,7 +161,7 @@
 										  echo '<input type="button" name="as" class="primary" value="Edit job">';
 										echo '</div>';
 										$n = $n + 1;
-										if($n == 5) exit;
+										if($n == 5) break;;
 									}
 								}
 								?>
