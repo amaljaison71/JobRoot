@@ -3876,6 +3876,9 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#727c7a', end
 
 .profile {
 	padding:2px;
+	border-radius: 15px;
+	background:#560808;
+	color: black;
 }
 
 

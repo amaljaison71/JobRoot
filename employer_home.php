@@ -3,7 +3,7 @@
 	/* Database connectivity for employer registration */
 	if ($_SERVER['REQUEST_METHOD'] == 'GET')
 	{
-	  
+
 		$con=mysqli_connect("localhost","root","");
 		$db=mysqli_select_db($con,"jobroot")or die('Error connecting to MySQL table.');
 		$email=$_SESSION['email'];
@@ -33,60 +33,9 @@
 
 ?>
 
-<!DOCTYPE HTML>
-<!--
-	JobRoot
--->
-<html>
-	<head>
-		<title>JobRoot</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="assets/css/main.css" />
-		<link rel="stylesheet" href="assets/css/style.css" />
-		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
-
-		<script type="text/javascript" src="employer_home.js"></script>
-	</head>
-	<body class="is-preload" onload="#">
-
-		<!-- Wrapper -->
-			<div id="wrapper">
-
-				<!-- Header -->
-					<header id="header" class="alt">
-
-						<h1><img src="images/logos.png" width="27%" height="27%" style="margin-left: 26px"></h1>
-						<p>Just another free, spot for finding perfect matching jobs
-						</p>
-					</header>
-
-				<!-- Nav -->
-					<nav id="nav">
-						<ul>
-							<li><a href="employer_home.php">Home</a></li>
-							<li><a href="employer_post_job.php">Post Jobs</a></li>
-							<li><a href="#">Edit Jobs</a></li>
-							<li><a href="#">Applied Candidates</a></li>
-							<li>
-								<ul class="profile-wrapper">
-									<li> <a>Profile</a>
-										<!-- user profile -->
-										<div class="profile">
-
-											<!-- more menu -->
-											<ul class="menu">
-												<li><a href="employer_edit_profile.php">Edit</a></li>
-												<li><a href="employer_change_password.html">Change Password</a></li>
-												<li><a href="index.html">Logout</a></li>
-											</ul>
-										</div>
-									</li>
-								</ul>
-							</li>
-						</ul>
-					</nav>
-
+<?php
+	include('employer_header.php');
+?>
 				<!-- Main -->
 					<div id="main">
 
@@ -231,46 +180,6 @@
 						</form>
 					</div>
 
-				<!-- Footer -->
-					<footer id="footer">
-						<section>
-							<h2>About Us</h2>
-							<p>As one of the very few profitable pure play internet companies in the country, JobRoot is India’s premier online classifieds company in recruitment and related services.</p>
-							<ul class="actions">
-								<li><a href="#" class="button">Learn More</a></li>
-							</ul>
-						</section>
-						<section>
-							<h2>Contact Us</h2>
-							<dl class="alt">
-								<dt>Address</dt>
-								<dd>SCMS School of Engineering and Technology &bull; Pallissery, KL 00000 &bull; India</dd>
-								<dt>Phone</dt>
-								<dd>(+91) 9562564852</dd>
-								<dt>Email</dt>
-								<dd><a href="#">information@jobroot.in</a></dd>
-							</dl>
-							<ul class="icons">
-								<li><a href="#" class="icon fa-twitter alt"><span class="label">Twitter</span></a></li>
-								<li><a href="#" class="icon fa-facebook alt"><span class="label">Facebook</span></a></li>
-								<li><a href="#" class="icon fa-instagram alt"><span class="label">Instagram</span></a></li>
-								<li><a href="#" class="icon fa-github alt"><span class="label">GitHub</span></a></li>
-								<li><a href="#" class="icon fa-dribbble alt"><span class="label">Dribbble</span></a></li>
-							</ul>
-						</section>
-						<p class="copyright">&copy;Design: <a href="#">AJ</a>.</p>
-					</footer>
-
-			</div>
-
-		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/jquery.scrollex.min.js"></script>
-			<script src="assets/js/jquery.scrolly.min.js"></script>
-			<script src="assets/js/browser.min.js"></script>
-			<script src="assets/js/breakpoints.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
-
-	</body>
-</html>
+<?php
+	include('employer_footer.php');
+?>

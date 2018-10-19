@@ -25,11 +25,11 @@
 			}
 			elseif ($row[3]==3)
 			{
-				include("jobseeker_home.php");
+				header('location:jobseeker_home.php');
 			}
 			else
 			{
-				include("admin_home.php");
+				header('location:admin_home.php');
 			}
 		}
 		else
@@ -68,7 +68,7 @@
 
 				<!-- Header -->
 					<header id="header">
-						<h1><img src="images/logos.png" width="20%" height="20%" style="margin-left: 26px"></h1>
+						<a href="index.html"><h1><img src="images/logos.png" width="20%" height="20%" style="margin-left: 26px"></h1></a>
 						<p>Sign in</p>
 					</header>
 
