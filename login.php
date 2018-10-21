@@ -25,6 +25,11 @@
 			}
 			elseif ($row[3]==3)
 			{
+				/* retrieve jsid from jobseeker table */
+        $sql="select jsid from jobseeker where email='".$email."'";
+        $res=mysqli_query($con,$sql) or die('Error in the sql query2');
+        $id=mysqli_fetch_row($res);
+  			$_SESSION['id']=$id[0];
 				header('location:jobseeker_home.php');
 			}
 			else

@@ -29,17 +29,35 @@
 				<!-- Nav -->
 					<nav id="nav">
 						<ul>
-							<li><a href="employer_home.php">Home</a></li>
+							<li><a href="jobseeker_home.php">Home</a></li>
+							<li><a href="jobseeker_jobs.php">Jobs</a></li>
 							<li>
 								<ul class="profile-wrapper">
-									<li> <a>Jobs</a>
+									<li> <a>Add</a>
 										<!-- user profile -->
 										<div class="profile">
 
 											<!-- more menu -->
 											<ul class="menu">
-												<li><a href="employer_post_job.php">Post Jobs</a></li>
-												<li><a href="employer_edit_job.php">Edit Jobs</a></li>
+												<li><a href="jobseeker_add_qualification.php">Qualification</a></li>
+												<li><a href="jobseeker_add_project.php">Projects</a></li>
+												<li><a href="jobseeker_add_experience.php">Experience</a></li>
+											</ul>
+										</div>
+									</li>
+								</ul>
+							</li>
+							<li>
+								<ul class="profile-wrapper">
+									<li> <a>Update</a>
+										<!-- user profile -->
+										<div class="profile">
+
+											<!-- more menu -->
+											<ul class="menu">
+												<li><a href="jobseeker_edit_qualification.php">Qualification</a></li>
+												<li><a href="jobseeker_edit_project.php">Projects</a></li>
+												<li><a href="jobseeker_edit_experience.php">Experience</a></li>
 											</ul>
 										</div>
 									</li>
@@ -53,9 +71,8 @@
 
 											<!-- more menu -->
 											<ul class="menu">
-												<li><a href="employer_view_jobs.php">Jobs</a></li>
-												<li><a href="employer_view_applied_candidates.php">Applied Candidates</a></li>
-												<li><a href="employer_view_selected_candidates.php">Selected Candidates</a></li>
+												<li><a href="jobseeker_view_applied_jobs.php">Applied Jobs</a></li>
+												<li><a href="jobseeker_view_selected_jobs.php">Selected Jobs</a></li>
 											</ul>
 										</div>
 									</li>
@@ -69,8 +86,8 @@
 
 											<!-- more menu -->
 											<ul class="menu">
-												<li><a href="employer_edit_profile.php">Edit</a></li>
-												<li><a href="employer_change_password.php">Change Password</a></li>
+												<li><a href="jobseeker_edit_profile.php">Edit</a></li>
+												<li><a href="jobseeker_change_password.php">Change Password</a></li>
 												<li><a href="index.php">Logout</a></li>
 											</ul>
 										</div>

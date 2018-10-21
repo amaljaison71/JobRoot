@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 06, 2018 at 04:28 PM
+-- Generation Time: Oct 21, 2018 at 11:02 AM
 -- Server version: 10.1.35-MariaDB
 -- PHP Version: 7.2.9
 
@@ -23,6 +23,20 @@ SET time_zone = "+00:00";
 --
 CREATE DATABASE IF NOT EXISTS `jobroot` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
 USE `jobroot`;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `applied_candidates`
+--
+
+CREATE TABLE `applied_candidates` (
+  `acid` int(10) NOT NULL,
+  `jsid` int(10) NOT NULL,
+  `job_id` int(10) NOT NULL,
+  `score` int(3) NOT NULL,
+  `flag` int(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -47,7 +61,108 @@ CREATE TABLE `employer` (
 --
 
 INSERT INTO `employer` (`empid`, `cname`, `cin`, `holoc`, `email`, `phone`, `category`, `website`, `about`) VALUES
-(12, 'INFOSYS LIMITED', 'L85110KA1981PLC013115', 'Bangalore', 'infosys@gmail.com', 545465245, 'Information Technology', 'https://www.infosys.com', 'zxvbxcfh vccbhndfhn cghfdgnhfcb cfdnhdsgsdg fdhdfhdfgh.');
+(13, 'zcfzx', 'zdv151v5xcvxvxz', 'Bangalore', 'infosys@gmail.com', 2147483647, 'Information Technology', 'http://localhost/JobRoot/employer_registration.htm', 'dvdzx xdzvdsvdc\r\ndvxd\r\nv\r\nxdv\r\ndvx\r\nvxzvxvxcv');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `jobs`
+--
+
+CREATE TABLE `jobs` (
+  `job_id` int(10) NOT NULL,
+  `empid` int(10) NOT NULL,
+  `title` varchar(100) NOT NULL,
+  `type` varchar(15) NOT NULL,
+  `location` varchar(25) NOT NULL,
+  `deadline` date NOT NULL,
+  `post` varchar(50) NOT NULL,
+  `short_desc` varchar(500) NOT NULL,
+  `full_desc` varchar(2000) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `jobs`
+--
+
+INSERT INTO `jobs` (`job_id`, `empid`, `title`, `type`, `location`, `deadline`, `post`, `short_desc`, `full_desc`) VALUES
+(16, 12, 'front end developer', 'Full Time', 'Delhi', '2018-02-15', 'UI Developer', 'front end developer', 'front end developer\r\nUI developer\r\nAhmedabad\r\n'),
+(17, 12, 'safdsfsdfs', 'Freelancer', 'Chandigarh', '2018-02-28', 'UI Developer', 'sdfsdfsdfsdfsdf', 'dsfsdfsdfsd\r\nsdfsadf\r\nasdfasfasfsadfsf+sf\r\nsfasf\r\nasfas\r\nfasfd\r\n');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `jobseeker`
+--
+
+CREATE TABLE `jobseeker` (
+  `jsid` int(10) NOT NULL,
+  `fname` varchar(20) NOT NULL,
+  `lname` varchar(20) NOT NULL,
+  `email` varchar(25) NOT NULL,
+  `state` varchar(50) NOT NULL,
+  `district` varchar(50) NOT NULL,
+  `postoffice` varchar(50) NOT NULL,
+  `address` varchar(500) NOT NULL,
+  `pincode` varchar(6) NOT NULL,
+  `phone` varchar(15) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `jobseeker`
+--
+
+INSERT INTO `jobseeker` (`jsid`, `fname`, `lname`, `email`, `state`, `district`, `postoffice`, `address`, `pincode`, `phone`) VALUES
+(1, 'Amal', 'Jaison', 'amaljaison@gmail.com', '13', 'Ernakulam', 'XYZ', 'ABC ', '123456', '2147483647'),
+(7, 'Ajith', 'K S', 'ajithks@gmail.com', 'Kerala', 'Thrissur', 'PQR', 'LMNO', '456789', '789456123'),
+(8, 'Jibin', 'James', 'jibinjames@gmail.com', 'Kerala', 'Thrissur', 'dsf', 'dasfasf', '456123', '456458789'),
+(14, 'Amal', 'T R', 'amaltr@gmail.com', 'Kerala', 'Thrissur', 'sacfs', 'sdfsadsd', '123456', '1234567890'),
+(15, 'Arunkumar', 'A', 'arunkumara@gmail.com', 'Kerala', 'Ernakulam', 'sacf', 'sdafcas', '787984', '6845456');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `jobseeker_education_details`
+--
+
+CREATE TABLE `jobseeker_education_details` (
+  `qual_id` int(10) NOT NULL,
+  `jsid` int(10) NOT NULL,
+  `qualification` varchar(50) NOT NULL,
+  `university` varchar(250) NOT NULL,
+  `institute` varchar(500) NOT NULL,
+  `cgpa` int(3) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `jobseeker_experience_details`
+--
+
+CREATE TABLE `jobseeker_experience_details` (
+  `exp_ip` int(10) NOT NULL,
+  `jsid` int(10) NOT NULL,
+  `employer` varchar(100) NOT NULL,
+  `post` varchar(100) NOT NULL,
+  `start` date NOT NULL,
+  `end` date NOT NULL,
+  `techs` varchar(500) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `jobseeker_project_details`
+--
+
+CREATE TABLE `jobseeker_project_details` (
+  `prj_id` int(10) NOT NULL,
+  `jsid` int(10) NOT NULL,
+  `topic` varchar(200) NOT NULL,
+  `techs` varchar(500) NOT NULL,
+  `about` varchar(1500) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -67,11 +182,48 @@ CREATE TABLE `login` (
 --
 
 INSERT INTO `login` (`id`, `email`, `password`, `role`) VALUES
-(10, 'infosys@gmail.com', '123', 2);
+(1, 'admin@jobroot.com', 'admin', 1),
+(10, 'infosys@gmail.com', '123', 2),
+(12, 'dsfsdv@gm.xfdv', '123', 2),
+(13, 'sacfzds@ddf.sd', '123', 2),
+(14, 'zxczxc@sjkch.dsv', '123', 2),
+(15, 'amaltr@gmail.com', '123', 3),
+(16, 'arunkumara@gmail.com', '123', 3);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `questions`
+--
+
+CREATE TABLE `questions` (
+  `qstn_id` int(10) NOT NULL,
+  `category` varchar(100) NOT NULL,
+  `question` varchar(2000) NOT NULL,
+  `option1` varchar(50) NOT NULL,
+  `option2` varchar(50) NOT NULL,
+  `option3` varchar(50) NOT NULL,
+  `option4` varchar(50) NOT NULL,
+  `answer` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `questions`
+--
+
+INSERT INTO `questions` (`qstn_id`, `category`, `question`, `option1`, `option2`, `option3`, `option4`, `answer`) VALUES
+(4, 'css', 'zcaszhkj k dshcksjc skjcjbasjkcn', 'sd', 'sad', 'sdds', 'sdd', 'sd'),
+(8, 'php', 'sdfsdcfscsdczx  sdvd  dsvsdv sd dsv dd sv sdsv dsv ', 'sdf', 'asd', 'asdf', 'asdsd', 'asd');
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `applied_candidates`
+--
+ALTER TABLE `applied_candidates`
+  ADD PRIMARY KEY (`acid`);
 
 --
 -- Indexes for table `employer`
@@ -85,6 +237,38 @@ ALTER TABLE `employer`
   ADD UNIQUE KEY `wesite` (`website`);
 
 --
+-- Indexes for table `jobs`
+--
+ALTER TABLE `jobs`
+  ADD PRIMARY KEY (`job_id`);
+
+--
+-- Indexes for table `jobseeker`
+--
+ALTER TABLE `jobseeker`
+  ADD PRIMARY KEY (`jsid`),
+  ADD UNIQUE KEY `email` (`email`),
+  ADD UNIQUE KEY `phone` (`phone`);
+
+--
+-- Indexes for table `jobseeker_education_details`
+--
+ALTER TABLE `jobseeker_education_details`
+  ADD PRIMARY KEY (`qual_id`);
+
+--
+-- Indexes for table `jobseeker_experience_details`
+--
+ALTER TABLE `jobseeker_experience_details`
+  ADD PRIMARY KEY (`exp_ip`);
+
+--
+-- Indexes for table `jobseeker_project_details`
+--
+ALTER TABLE `jobseeker_project_details`
+  ADD PRIMARY KEY (`prj_id`);
+
+--
 -- Indexes for table `login`
 --
 ALTER TABLE `login`
@@ -92,20 +276,68 @@ ALTER TABLE `login`
   ADD UNIQUE KEY `email` (`email`);
 
 --
+-- Indexes for table `questions`
+--
+ALTER TABLE `questions`
+  ADD PRIMARY KEY (`qstn_id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `applied_candidates`
+--
+ALTER TABLE `applied_candidates`
+  MODIFY `acid` int(10) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `employer`
 --
 ALTER TABLE `employer`
-  MODIFY `empid` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `empid` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
+--
+-- AUTO_INCREMENT for table `jobs`
+--
+ALTER TABLE `jobs`
+  MODIFY `job_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+
+--
+-- AUTO_INCREMENT for table `jobseeker`
+--
+ALTER TABLE `jobseeker`
+  MODIFY `jsid` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
+-- AUTO_INCREMENT for table `jobseeker_education_details`
+--
+ALTER TABLE `jobseeker_education_details`
+  MODIFY `qual_id` int(10) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `jobseeker_experience_details`
+--
+ALTER TABLE `jobseeker_experience_details`
+  MODIFY `exp_ip` int(10) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `jobseeker_project_details`
+--
+ALTER TABLE `jobseeker_project_details`
+  MODIFY `prj_id` int(10) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `login`
 --
 ALTER TABLE `login`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+
+--
+-- AUTO_INCREMENT for table `questions`
+--
+ALTER TABLE `questions`
+  MODIFY `qstn_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- Database: `phpmyadmin`
 --
@@ -255,7 +487,7 @@ CREATE TABLE `pma__recent` (
 --
 
 INSERT INTO `pma__recent` (`username`, `tables`) VALUES
-('root', '[{\"db\":\"jobroot\",\"table\":\"login\"},{\"db\":\"jobroot\",\"table\":\"employer\"},{\"db\":\"user\",\"table\":\"image\"},{\"db\":\"user\",\"table\":\"login\"},{\"db\":\"User\",\"table\":\"login\"},{\"db\":\"jobroot\",\"table\":\"questions\"},{\"db\":\"jobroot\",\"table\":\"question_category\"},{\"db\":\"jobroot\",\"table\":\"requirements\"},{\"db\":\"jobroot\",\"table\":\"job_vacancy\"},{\"db\":\"jobroot\",\"table\":\"applied_candidates\"}]');
+('root', '[{\"db\":\"jobroot\",\"table\":\"applied_candidates\"},{\"db\":\"jobroot\",\"table\":\"jobs\"},{\"db\":\"jobroot\",\"table\":\"employer\"},{\"db\":\"jobroot\",\"table\":\"login\"},{\"db\":\"jobroot\",\"table\":\"jobseeker_experience_details\"},{\"db\":\"jobroot\",\"table\":\"jobseeker_project_details\"},{\"db\":\"jobroot\",\"table\":\"jobseeker_education_details\"},{\"db\":\"jobroot\",\"table\":\"jobseeker\"},{\"db\":\"jobroot\",\"table\":\"questions\"},{\"db\":\"user\",\"table\":\"image\"}]');
 
 -- --------------------------------------------------------
 
@@ -362,7 +594,7 @@ CREATE TABLE `pma__userconfig` (
 --
 
 INSERT INTO `pma__userconfig` (`username`, `timevalue`, `config_data`) VALUES
-('root', '2018-10-06 14:28:03', '{\"Console\\/Mode\":\"collapse\",\"NavigationWidth\":177}');
+('root', '2018-10-21 08:36:41', '{\"Console\\/Mode\":\"collapse\",\"NavigationWidth\":248}');
 
 -- --------------------------------------------------------
 

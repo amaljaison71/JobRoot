@@ -16,7 +16,7 @@
 							online classifieds company in recruitment and related services.</p>
 						<ul class="actions">
 							<li><a href="#" class="button">Learn More</a></li>
-							<li><a href="jobseeker_registration.html" class="button">Get Started</a></li>
+							<li><a href="jobseeker_registration.php" class="button">Get Started</a></li>
 						</ul>
 					</div>
 					<span class="image"><img src="images/pic01.png" alt="" /></span>

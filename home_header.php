@@ -30,7 +30,7 @@
 		<!-- Nav -->
 		<nav id="nav">
 			<ul>
-				<li><a href="index.html">Home</a></li>
+				<li><a href="index.php">Home</a></li>
 				<li><a href="jobs_list.php">Search Jobs</a></li>
 				<li>
 					<ul class="profile-wrapper">
@@ -41,7 +41,7 @@
 								<!-- more menu -->
 								<ul class="menu">
 									<li><a href="employer_registration.html">Employer</a></li>
-									<li><a href="jobseeker_registration.html">Jobseeker</a></li>
+									<li><a href="jobseeker_registration.php">Jobseeker</a></li>
 								</ul>
 							</div>
 						</li>
