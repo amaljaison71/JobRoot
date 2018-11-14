@@ -26,8 +26,6 @@
 		$sql="select * from applied_candidates where flag='1'";
 		$selected_candidates=mysqli_query($con,$sql) or die('Error in the sql query4');
 
-		/* Close db connection */
-		mysqli_close($con);
 	}
 
 ?>
@@ -156,9 +154,14 @@
 				</section>
 			</div>
 		</form>
-	</div>	
+	</div>
 
 <!-- Footer -->
 <?php
 	include('employer_footer.php');
+?>
+
+<?php
+  /* Close db connection */
+  mysqli_close($con);
 ?>

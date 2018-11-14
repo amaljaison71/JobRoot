@@ -2020,6 +2020,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#727c7a', end
 	input[type="date"],
 	input[type="url"],
 	input[type="number"],
+	input[type="tel"],
 	select,
 	textarea {
 		-moz-appearance: none;
@@ -2042,6 +2043,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#727c7a', end
 		input[type="date"]:invalid,
 		input[type="url"]:invalid,
 		input[type="number"]:invalid,
+		input[type="tel"]:invalid,
 		select:invalid,
 		textarea:invalid {
 			box-shadow: none;
@@ -2070,6 +2072,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#727c7a', end
 	input[type="date"],
 	input[type="url"],
 	input[type="number"],
+	input[type="tel"],
 	select {
 		height: 2.75em;
 	}
@@ -2168,6 +2171,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#727c7a', end
 	input[type="date"],
 	input[type="url"],
 	input[type="number"],
+	input[type="tel"],
 	select,
 	textarea {
 		background-color: rgba(255, 255, 255, 0.075);
@@ -2180,6 +2184,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#727c7a', end
 		input[type="date"]:focus,
 		input[type="url"]:focus,
 		input[type="number"]:focus,
+		input[type="tel"]:focus,
 		select:focus,
 		textarea:focus {
 			border-color: #f91747;
@@ -3495,6 +3500,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#727c7a', end
 		#main input[type="date"],
 		#main input[type="url"],
 		#main input[type="number"],
+		input[type="tel"],
 		#main select,
 		#main textarea {
 			background-color: rgba(222, 222, 222, 0.25);
@@ -3507,6 +3513,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#727c7a', end
 			#main input[type="date"]:focus,
 			#main input[type="url"]:focus,
 			#main input[type="number"]:focus,
+			input[type="tel"]:focus,
 			#main select:focus,
 			#main textarea:focus {
 				border-color: #f91747;

@@ -10,9 +10,6 @@
 	$sql="select * from applied_candidates where jsid='".$_SESSION['id']."' AND flag='1'";
 	$applied_jobs=mysqli_query($con,$sql) or die('Error in the sql query1');
 
-
-	 /* Close db connection */
-	 mysqli_close($con);
 ?>
 
 <!-- Header -->
@@ -85,4 +82,9 @@
 <!-- Footer -->
 <?php
   include('employer_footer.php');
+?>
+
+<?php
+  /* Close db connection */
+  mysqli_close($con);
 ?>

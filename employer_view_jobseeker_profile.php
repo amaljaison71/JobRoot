@@ -6,32 +6,53 @@
 	$db=mysqli_select_db($con,"jobroot")or die('Error connecting to MySQL table.');
 
 	/* Retrieve values from jobseeker table */
-	$sql="select * from jobseeker where jsid='".$_SESSION['id']."'";
+	$sql="select * from jobseeker where jsid='".$_SESSION['jsid']."'";
 	$jobseeker=mysqli_query($con,$sql) or die('Error in the sql query1');
   $js_row=mysqli_fetch_row($jobseeker);
 
   /* Retrieve values from jobseeker_education_details table */
-	$sql="select * from jobseeker_education_details where jsid='".$_SESSION['id']."'";
+	$sql="select * from jobseeker_education_details where jsid='".$_SESSION['jsid']."'";
 	$js_edu=mysqli_query($con,$sql) or die('Error in the sql query2');
 
   /* Retrieve values from jobseeker_project_details table */
-	$sql="select * from jobseeker_project_details where jsid='".$_SESSION['id']."'";
+	$sql="select * from jobseeker_project_details where jsid='".$_SESSION['jsid']."'";
 	$js_pro=mysqli_query($con,$sql) or die('Error in the sql query3');
 
   /* Retrieve values from jobseeker_experience_details table */
-	$sql="select * from jobseeker_experience_details where jsid='".$_SESSION['id']."'";
-	$js_exp=mysqli_query($con,$sql) or die('Error in the sql query3');
+	$sql="select * from jobseeker_experience_details where jsid='".$_SESSION['jsid']."'";
+	$js_exp=mysqli_query($con,$sql) or die('Error in the sql query4');
+
+	if ($_SERVER['REQUEST_METHOD'] == 'POST')
+	{
+		if(isset($_POST['select']))
+		{
+      /* Update flag in applied_candidates table */
+			$sql="update applied_candidates set flag=1 where acid='".$_SESSION['acid']."'";
+			$res=mysqli_query($con,$sql) or die('Error in sql query4');
+			if($res>0)
+			{
+				echo '<script language="javascript">';
+				echo 'alert("Successfully Updated.")';
+				echo '</script>';
+			}
+			else
+			{
+				echo '<script language="javascript">';
+				echo 'alert("Error!")';
+				echo '</script>';
+			}
+		}
+	}
 ?>
 
-<!-- Header -->
 <?php
-  include('jobseeker_header.php');
+	include('employer_header.php');
 ?>
 
 <!-- Main -->
 <div id="main">
 
-  <form method="get" action="#" enctype="multipart/form-data">
+  <form method="post" action="#" enctype="multipart/form-data">
     <!-- Introduction -->
     <div id="main">
       <section id="intro" class="main">
@@ -162,15 +183,16 @@
 						</tbody>
 					</table>
 				</div>
+				<div class="col-12">
+					<input type="submit" class="primary" name="select" value="Select for Interview"/>
+				</div>
       </section>
     </div>
   </from>
 </div>
 
-
-<!-- Footer -->
 <?php
-  include('employer_footer.php');
+	include('employer_footer.php');
 ?>
 
 <?php

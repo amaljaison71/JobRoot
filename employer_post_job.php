@@ -25,9 +25,18 @@
     $sql="insert into jobs(empid,title,type,location,deadline,post,short_desc,full_desc) values($empid,'$title','$type','$location','$deadline','$post','$short_desc','$full_desc')" ;
     $res=mysqli_query($con,$sql) or die('Error in the sql query2');
 
-    /* Close db connection */
-    mysqli_close($con);
-    header('location:employer_post_job.php');
+    if($res>0)
+		{
+			echo '<script language="javascript">';
+			echo 'alert("Successfully Inserted.")';
+			echo '</script>';
+		}
+		else
+		{
+			echo '<script language="javascript">';
+			echo 'alert("Error!")';
+			echo '</script>';
+		}
   }
 ?>
 
@@ -44,7 +53,7 @@
 								<form method="post" action="#">
 									<div class="row gtr-uniform">
 										<div class="col-12">
-											<input type="text" name="job_title" id="job_title" placeholder="Job Title">
+											<input type="text" name="job_title" id="job_title" placeholder="Job Title" maxlength="100" style="box-sizing: border-box; border: 1px solid red; border-radius: 10px;" onkeypress="return isAlpha(event);" required/>
 										</div>
 										<div class="col-4 col-12-small">
 											<input type="radio" id="full_time" name="job_type" value="Full Time" checked>
@@ -59,7 +68,7 @@
 											<label for="freelancer">Freelancer</label>
 										</div>
 										<div class="col-6">
-											<select name="location" value=""  >
+											<select name="location" value="" style="box-sizing: border-box; border: 1px solid red; border-radius: 10px;" required >
 												<option selected="selected">-Job Location-</option>
 												<option disabled="disabled" style="background-color:#f2efef"><font color="#000000"><i>-Top Metropolitan Cities-</i></font></option>
 												<option value="Ahmedabad">Ahmedabad</option>
@@ -295,10 +304,10 @@
 											</select>
 										</div>
 										<div class="col-6">
-											<input type="date" name="deadline" id="deadline" value="2018-02-01" placeholder="Deadline">
+											<input type="date" name="deadline" id="deadline" placeholder="Deadline" style="box-sizing: border-box; border: 1px solid red; border-radius: 10px;" placeholder="Deadline" required />
 										</div>
 										<div class="col-12">
-											<select name="post" value=""  >
+											<select name="post" value="" style="box-sizing: border-box; border: 1px solid red; border-radius: 10px;" placeholder="Deadline" required / >
 												<option selected="selected" disabled="disabled">-Post-</option>
 												<option value="UI Developer">UI Developer</option>
 												<option value="DB Designer">DB Designer</option>
@@ -308,10 +317,10 @@
 											</select>
 										</div>
 										<div class="col-12">
-											<textarea name="short_description" id="short_description" placeholder="Short Description" rows="4"></textarea>
+											<textarea name="short_description" id="short_description" placeholder="Short Description" rows="4" maxlength="500" style="box-sizing: border-box; border: 1px solid red; border-radius: 10px;" required></textarea>
 										</div>
 										<div class="col-12">
-											<textarea name="full_description" id="full_description" placeholder="Detailed Description" rows="8"></textarea>
+											<textarea name="full_description" id="full_description" placeholder="Detailed Description" rows="8" maxlength="2000" style="box-sizing: border-box; border: 1px solid red; border-radius: 10px;"></textarea>
 										</div>
 										<div class="col-12">
 											<ul class="actions">
@@ -328,3 +337,43 @@
 <?php
 	include('employer_footer.php');
 ?>
+
+<?php
+  /* Close db connection */
+  mysqli_close($con);
+?>
+
+<script type="text/javascript">
+  var specialKeys = new Array();
+  specialKeys.push(8); //Backspace
+  function isAlpha(e)
+	{
+    var keyCode = e.keyCode;
+    if(specialKeys.indexOf(keyCode) != -1 || (keyCode >= 65 && keyCode <= 90) || (keyCode >= 97 && keyCode <= 122) || keyCode == 32)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+  }
+
+  window.onload = validateDate();
+
+  function validateDate()
+  {
+    var d = new Date(),
+    month = '' + (d.getMonth() + 1),
+    day = '' + d.getDate(),
+    year = d.getFullYear();
+
+    if (month.length < 2) month = '0' + month;
+    if (day.length < 2) day = '0' + day;
+
+    dt = [year, month, day].join('-');
+
+    document.getElementById('deadline').min = dt;
+    document.getElementById('deadline').value = dt;
+  }
+</script>

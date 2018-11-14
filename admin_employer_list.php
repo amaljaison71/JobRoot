@@ -15,12 +15,34 @@
        $id=$_POST['delete'];
 
 			 /* Update values in table */
-			 $sql="delete from employer where empid='".$id."'";
-			 $res_update=mysqli_query($con,$sql) or die('Error in the sql query3');
+			 $sql="select email from employer where empid='".$id."'";
+			 $res=mysqli_query($con,$sql) or die('Error in the sql query7');
+			 $mail=mysqli_fetch_row($res);
 
-			 /* Close db connection */
-			 mysqli_close($con);
-			 header('location:admin_employer_list.php');
+			 $sql="delete from login where email='".$mail[0]."'";
+			 $res_update3=mysqli_query($con,$sql) or die('Error in the sql query6');
+
+			 $sql="delete from employer where empid='".$id."'";
+			 $res_update1=mysqli_query($con,$sql) or die('Error in the sql query3');
+
+			 $sql="delete from applied_candidates where job_id in (select job_id from jobs where empid='".$id."')";
+			 $res_update2=mysqli_query($con,$sql) or die('Error in the sql query4');
+
+			 $sql="delete from jobs where empid='".$id."'";
+			 $res_update3=mysqli_query($con,$sql) or die('Error in the sql query5');
+
+			 if($res_update1>0 && $res_update2>0 && $res_update3>0)
+	 		{
+	 			echo '<script language="javascript">';
+	 			echo 'alert("Successfully Deleted.")';
+	 			echo '</script>';
+	 		}
+	 		else
+	 		{
+	 			echo '<script language="javascript">';
+	 			echo 'alert("Error!")';
+	 			echo '</script>';
+	 		}
    }
 	}
 
@@ -51,8 +73,6 @@
 								if(mysqli_num_rows($employer)==0)
 								{
 									echo "Noting to Show..!";
-									/* Close db connection */
-									mysqli_close($con);
 								}
 								else
 								{
@@ -78,4 +98,9 @@
 <!-- Footer -->
 <?php
 	include('employer_footer.php');
+?>
+
+<?php
+  /* Close db connection */
+  mysqli_close($con);
 ?>

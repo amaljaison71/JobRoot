@@ -21,19 +21,27 @@
 		$cin=$_POST['cin'];
 		$category=$_POST['category'];
 		$location=$_POST['location'];
-		$email=$_POST['email'];
 		$website=$_POST['website'];
 		$phone=$_POST['phone'];
 		$description=$_POST['description'];
 
 		/* Update values into employer table */
-		$sql="update employer set cname='$cname', cin='$cin', holoc='$location', email='$email', phone='$phone', category='$category', website='$website', about='$description' where empid='".$empid."'";
+		$sql="update employer set cname='$cname', cin='$cin', holoc='$location', phone='$phone', category='$category', website='$website', about='$description' where empid='".$empid."'";
 		$res=mysqli_query($con,$sql) or die('Error in the sql query3');
-	}
 
-	/* Close db connection */
-	mysqli_close($con);
-	header('location:employer_edit_profile.php');
+		if($res>0)
+		{
+			echo '<script language="javascript">';
+			echo 'alert("Successfully Updated.")';
+			echo '</script>';
+		}
+		else
+		{
+			echo '<script language="javascript">';
+			echo 'alert("Error!")';
+			echo '</script>';
+		}
+	}
 ?>
 
 <?php
@@ -57,15 +65,15 @@
 											<div class="row gtr-uniform">
 
 														<div class="col-6 col-12-xsmall">
-															<input type="text" name="cname" id="cname" value="<?php echo $row[1]; ?>" placeholder="Company name" />
+															<input type="text" name="cname" id="cname" value="<?php echo $row[1]; ?>" placeholder="Company name" maxlength="50" style="box-sizing: border-box; border: 1px solid red; border-radius: 10px;" onkeypress="return isAlpha(event);" required/>
 														</div>
 
 														<div class="col-6 col-12-xsmall">
-															<input type="text" name="cin" id="cin" value="<?php echo $row[2]; ?>" placeholder="CompanyIN" />
+															<input type="text" name="cin" id="cin" value="<?php echo $row[2]; ?>" placeholder="CompanyIN" maxlength="21" minlength="21" style="box-sizing: border-box; border: 1px solid red; border-radius: 10px;" onkeypress="return isAlphaNumeric(event);" required/>
 														</div>
 
 														<div class="col-12">
-															<select name="category" id="category" value="<?php echo $row[6]; ?>">
+															<select name="category" id="category" value="<?php echo $row[6]; ?>" style="box-sizing: border-box; border: 1px solid red; border-radius: 10px;" required>
 																<option value="">- Category -</option>
 																<option value="Information Technology">Information Technology</option>
 																<option value="Networking">Networking</option>
@@ -77,7 +85,7 @@
 
 
 														<div class="col-12">
-															<select name="location" value="<?php echo $row[3]; ?>"  >
+															<select name="location" value="<?php echo $row[3]; ?>" style="box-sizing: border-box; border: 1px solid red; border-radius: 10px;" required >
 																<option selected="selected">-Head Office Location-</option>
 																<option disabled="disabled" style="background-color:#f2efef"><font color="#000000"><i>-Top Metropolitan Cities-</i></font></option>
 																<option value="Ahmedabad">Ahmedabad</option>
@@ -316,21 +324,21 @@
 
 
 												<div class="col-6 col-12-xsmall">
-													<input type="email" name="email" id="email" value="<?php echo $row[4]; ?>" placeholder="Email" />
+													<input type="email" name="email" id="email" value="<?php echo $row[4]; ?>" placeholder="Email" disabled required/>
 												</div>
 
 												<div class="col-6 col-12-xsmall">
-													<input type="url" name="website" id="website" value="<?php echo $row[7]; ?>" placeholder="Website" />
+													<input type="url" name="website" id="website" value="<?php echo $row[7]; ?>" maxlength="100" style="box-sizing: border-box; border: 1px solid red; border-radius: 10px;" placeholder="Website" required/>
 												</div>
 
 
 
 												<div class="col-12">
-													<input type="number" name="phone" id="phone" value="<?php echo $row[5]; ?>" placeholder="Phone" />
+													<input type="text" name="phone" id="phone" value="<?php echo $row[5]; ?>" minlength="10" maxlength="11" style="box-sizing: border-box; border: 1px solid red; border-radius: 10px;" placeholder="Phone" onkeypress="return isNum(event);" required/>
 												</div>
 
 												<div class="col-12">
-													<textarea name="description" id="description" placeholder="Description" rows="6"><?php echo $row[8]; ?></textarea>
+													<textarea name="description" id="description" placeholder="Description" rows="6" maxlength="1500" required><?php echo $row[8]; ?></textarea>
 												</div>
 												<div class="col-12">
 													<ul class="actions">
@@ -350,3 +358,49 @@
 <?php
 	include('employer_footer.php');
 ?>
+
+<?php
+  /* Close db connection */
+  mysqli_close($con);
+?>
+
+<script type="text/javascript">
+  var specialKeys = new Array();
+  specialKeys.push(8); //Backspace
+  function isAlphaNumeric(e)
+	{
+    var keyCode = e.keyCode;
+    if((keyCode >= 48 && keyCode <= 57) || specialKeys.indexOf(keyCode) != -1 || (keyCode >= 65 && keyCode <= 90) || (keyCode >= 97 && keyCode <= 122))
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+  }
+	function isNum(e)
+	{
+    var keyCode = e.keyCode;
+    if((keyCode >= 48 && keyCode <= 57))
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+  }
+	function isAlpha(e)
+	{
+    var keyCode = e.keyCode;
+    if(specialKeys.indexOf(keyCode) != -1 || (keyCode >= 65 && keyCode <= 90) || (keyCode >= 97 && keyCode <= 122) || keyCode==32)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+  }
+</script>

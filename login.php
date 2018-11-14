@@ -32,7 +32,7 @@
   			$_SESSION['id']=$id[0];
 				header('location:jobseeker_home.php');
 			}
-			else
+			else if($row[3]==1)
 			{
 				header('location:admin_home.php');
 			}
@@ -41,19 +41,19 @@
 		{
 			echo "Invalid Login Credentials..!";
 		}
-
-		/* Close db connection */
-		mysqli_close($con);
+		if(isset($_POST['employer']))
+		{
+			header('location:employer_registration.html');
+		}
+		else if(isset($_POST['jobseeker']))
+		{
+			header('location:jobseeker_registration.php');
+		}
 	}
 
 ?>
 
 <!DOCTYPE HTML>
-<!--
-	Stellar by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
 <html>
 	<head>
 		<title>Login</title>
@@ -61,94 +61,49 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
-
-
-
-
 	</head>
-	<body class="is-preload" style="background-image: url(images/background.jpg);background-size: 100% 100%;">
+	<body class="is-preload" style="background-image: url(images/login_background.jpg);background-size: 100% 100%;">
+		<div  style="width:350px; height: auto; opacity: 5; background: rgba(204, 204, 255, 0.2); float: right; margin: 10px 10px 0 0;">
+			<header id="header">
+				<a href="index.html"><h1><img src="images/logos.png" width="80%" height="20%" style="margin-left: 26px"></h1></a>
+				<p>Sign in</p>
+			</header>
+					<form method="post" action="#" >
+							<section id="intro" class="main" style="margin: 0 10px 10px 10px;">
+								<input type="email" name="email" id="email" value="" placeholder="Email" /> </br>
+								<input type="password" name="pswd" id="pswd" value="" placeholder="Password" /> </br>
+								<input type="submit" value="Login" class="primary" style="margin-left:25%;" />
+							</section>
+							<section id="intro" class="main" style="margin: 0px 10px 10px 10px; border-top:solid 1px; padding-top:10px;">
+								<h5><b>Register as  </b><button class="button" name="employer">Employer</button> <button class="button" name="jobseeker">Jobseeker</button></h5>
+							</section>
+					</form>
+		</div>
 
-		<!-- Wrapper -->
-			<div id="wrapper">
+		<!-- Footer -->
+			<footer id="footer">
 
-				<!-- Header -->
-					<header id="header">
-						<a href="index.html"><h1><img src="images/logos.png" width="20%" height="20%" style="margin-left: 26px"></h1></a>
-						<p>Sign in</p>
-					</header>
+				<section style="margin-left: 430px;">
+					<h2 style="margin-left: 85px">Follow us on</h2>
 
-				<!-- Main -->
+					<ul class="icons">
+						<li><a href="#" class="icon fa-twitter alt"><span class="label">Twitter</span></a></li>
+						<li><a href="#" class="icon fa-facebook alt"><span class="label">Facebook</span></a></li>
+						<li><a href="#" class="icon fa-instagram alt"><span class="label">Instagram</span></a></li>
+						<li><a href="#" class="icon fa-github alt"><span class="label">GitHub</span></a></li>
+						<li><a href="#" class="icon fa-dribbble alt"><span class="label">Dribbble</span></a></li>
+					</ul>
+				</section>
 
+			</footer>
 
-						<!-- Content -->
-							<section id="content" class="main" >
-
-								<!-- Text -->
-
-
-								<!-- Lists -->
-
-<!-- Form -->
-									<section>
-
-										<form method="post" action="#" >
-											<div class="row gtr-uniform">
-												<div class="col-6" style="margin-left: 310px;">
-													<input type="email" name="email" id="email" value="" placeholder="Email" />
-												</div>
-
-												<div class="col-6" style="margin-left: 310px;">
-													<input type="password" name="pswd" id="pswd" value="" placeholder="Password" />
-												</div>
-
-												<div class="col-12" style="margin-left: 480px;>
-													<ul class="actions">
-														<li><input type="submit" value="Login" class="primary" /></li>
-
-													</ul>
-												</div>
-
-
-
-
-											</div>
-
-
-
-										</form>
-
-
-								<!-- Buttons -->
-									</div>
-
-				<!-- Footer -->
-					<footer id="footer">
-
-						<section style="margin-left: 430px;">
-							<h2 style="margin-left: 85px">Follow us on</h2>
-
-							<ul class="icons">
-								<li><a href="#" class="icon fa-twitter alt"><span class="label">Twitter</span></a></li>
-								<li><a href="#" class="icon fa-facebook alt"><span class="label">Facebook</span></a></li>
-								<li><a href="#" class="icon fa-instagram alt"><span class="label">Instagram</span></a></li>
-								<li><a href="#" class="icon fa-github alt"><span class="label">GitHub</span></a></li>
-								<li><a href="#" class="icon fa-dribbble alt"><span class="label">Dribbble</span></a></li>
-							</ul>
-						</section>
-
-					</footer>
-
-			</div>
-
-
-		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/jquery.scrollex.min.js"></script>
-			<script src="assets/js/jquery.scrolly.min.js"></script>
-			<script src="assets/js/browser.min.js"></script>
-			<script src="assets/js/breakpoints.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
-
+			<!-- Scripts -->
+				<script src="assets/js/jquery.min.js"></script>
+				<script src="assets/js/jquery.scrollex.min.js"></script>
+				<script src="assets/js/jquery.scrolly.min.js"></script>
+				<script src="assets/js/browser.min.js"></script>
+				<script src="assets/js/breakpoints.min.js"></script>
+				<script src="assets/js/util.js"></script>
+				<script src="assets/js/main.js"></script>
 	</body>
 </html>

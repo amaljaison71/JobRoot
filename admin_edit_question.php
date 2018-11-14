@@ -55,7 +55,7 @@
               echo '<div class="row gtr-uniform">';
                 echo '<input type="hidden" style="all: initial;" name="qid" id="qid" value="' . $qstn_id . '">';
                 echo '<div class="col-12">';
-                  echo '<select name="category" value=""  required>';
+                  echo '<select name="category" value="" style="box-sizing: border-box; border: 1px solid red; border-radius: 10px;"  required>';
                     echo '<option selected="selected" disabled="disabled">-Category-</option>';
                     echo '<option value="html">HTML</option>';
                     echo '<option value="sql">SQL</option>';
@@ -69,22 +69,22 @@
                   echo '</select>';
                 echo '</div>';
                 echo '<div class="col-12">';
-                  echo '<textarea name="question" id="question" placeholder="Question" rows="8" required>' . $qstn_row[2] . '</textarea>';
+                  echo '<textarea name="question" id="question" placeholder="Question" rows="8" maxlength="2000" style="box-sizing: border-box; border: 1px solid red; border-radius: 10px;" required>' . $qstn_row[2] . '</textarea>';
                 echo '</div>';
                 echo '<div class="col-6">';
-                  echo '<input type="text" name="option1" id="option1" value="' . $qstn_row[3] . '" placeholder="Option1" required/>';
+                  echo '<input type="text" name="option1" id="option1" value="' . $qstn_row[3] . '" placeholder="Option1" maxlength="50" style="box-sizing: border-box; border: 1px solid red; border-radius: 10px;" required/>';
                 echo '</div>';
                 echo '<div class="col-6">';
-                  echo '<input type="text" name="option2" id="option2" value="' . $qstn_row[4] . '" placeholder="Option2" required/>';
+                  echo '<input type="text" name="option2" id="option2" value="' . $qstn_row[4] . '" placeholder="Option2" maxlength="50" style="box-sizing: border-box; border: 1px solid red; border-radius: 10px;" required/>';
                 echo '</div>';
                 echo '<div class="col-6">';
-                  echo '<input type="text" name="option3" id="option3" value="' . $qstn_row[5] . '" placeholder="Option3" required/>';
+                  echo '<input type="text" name="option3" id="option3" value="' . $qstn_row[5] . '" placeholder="Option3" maxlength="50" style="box-sizing: border-box; border: 1px solid red; border-radius: 10px;" required/>';
                 echo '</div>';
                 echo '<div class="col-6">';
-                  echo '<input type="text" name="option4" id="option4" value="' . $qstn_row[6] . '" placeholder="Option4" required/>';
+                  echo '<input type="text" name="option4" id="option4" value="' . $qstn_row[6] . '" placeholder="Option4" maxlength="50" style="box-sizing: border-box; border: 1px solid red; border-radius: 10px;" required/>';
                 echo '</div>';
                 echo '<div class="col-12">';
-                  echo '<input type="text" name="answer" id="answer" value="' . $qstn_row[7] . '" placeholder="Answer" required/>';
+                  echo '<input type="text" name="answer" id="answer" value="' . $qstn_row[7] . '" placeholder="Answer" maxlength="50" style="box-sizing: border-box; border: 1px solid red; border-radius: 10px;" required/>';
                 echo '</div>';
                 echo '<div class="col-12">';
                   echo '<ul class="actions">';
@@ -111,9 +111,18 @@
               $sql="update questions set category='$category', question='$question', option1='$option1', option2='$option2', option3='$option3', option4='$option4', answer='$answer' where qstn_id='".$id."'";
               $res_update=mysqli_query($con,$sql) or die('Error in the sql query3');
 
-              /* Close db connection */
-              mysqli_close($con);
-              header('location:admin_edit_questions.php');
+              if($res_update>0)
+          		{
+          			echo '<script language="javascript">';
+          			echo 'alert("Successfully Updated.")';
+          			echo '</script>';
+          		}
+          		else
+          		{
+          			echo '<script language="javascript">';
+          			echo 'alert("Error!")';
+          			echo '</script>';
+          		}
             }
 
             if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['delete']))
@@ -124,9 +133,18 @@
               $sql="delete from questions where qstn_id='".$id."'";
               $res_update=mysqli_query($con,$sql) or die('Error in the sql query3');
 
-              /* Close db connection */
-              mysqli_close($con);
-              header('location:admin_edit_questions.php');
+              if($res_update>0)
+          		{
+          			echo '<script language="javascript">';
+          			echo 'alert("Successfully Deleted.")';
+          			echo '</script>';
+          		}
+          		else
+          		{
+          			echo '<script language="javascript">';
+          			echo 'alert("Error!")';
+          			echo '</script>';
+          		}
             }
           ?>
 				</div>
@@ -139,4 +157,9 @@
 <!-- Footer -->
 <?php
 	include('employer_footer.php');
+?>
+
+<?php
+  /* Close db connection */
+  mysqli_close($con);
 ?>

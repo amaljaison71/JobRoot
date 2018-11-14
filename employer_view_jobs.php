@@ -16,12 +16,17 @@
 		$_SESSION['empid'] = $empid;
 
 		/* Retrieve values from jobs table */
-		$sql="select * from jobs where empid='".$empid."'";
+		$dt = date("Y-m-d");
+		$sql="select * from jobs where empid='".$empid."' AND deadline <='" . $dt . "'";
 		$jobs=mysqli_query($con,$sql) or die('Error in the sql query2');
 
-		/* Close db connection */
-		mysqli_close($con);
 		//header('location:employer_view_jobs.php');
+
+		if(isset($_GET['edit']))
+		{
+			$_SESSION['job_id']=$_GET['edit'];
+			header('location:employer_edit_job1.php');
+		}
 	}
 
 ?>
@@ -52,7 +57,7 @@
 								echo '<h3><b>' . $row['deadline'] . '</b></h3>';
 								echo '<h4><i>Description</i></h4>';
 								echo '<h4>' . $row['short_desc'] . '</h4>';
-								echo '<input type="button" name="as" class="primary" value="Edit job">';
+								echo '<button type="submit" name="edit" class="primary" value="' . $row[0] .'">Edit Job</button>';
 							echo '</div>';
 						}
 					}
@@ -64,4 +69,9 @@
 
 <?php
 	include('employer_footer.php');
+?>
+
+<?php
+  /* Close db connection */
+  mysqli_close($con);
 ?>

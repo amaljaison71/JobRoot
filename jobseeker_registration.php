@@ -46,12 +46,6 @@
   		}
 
 		}
-
-    if(isset($_POST['education']))
-
-
-    /* Close db connection */
-    mysqli_close($con);
   }
 ?>
 
@@ -95,36 +89,40 @@
   												<div class="col-10">
   													<div class="row gtr-uniform">
   														<div class="col-6">
-  															<input type="text" name="fname" id="fname" value="" placeholder="First Name" required/>
+  															<input type="text" name="fname" id="fname" value="" placeholder="First Name" maxlength="20" style="box-sizing: border-box; border: 1px solid red; border-radius: 10px;" onkeypress="return isAlpha(event);" required/>
   														</div>
   														<div class="col-6">
-  															<input type="text" name="lname" id="lname" value="" placeholder="Last Name" required/>
+  															<input type="text" name="lname" id="lname" value="" placeholder="Last Name" maxlength="20" style="box-sizing: border-box; border: 1px solid red; border-radius: 10px;" onkeypress="return isAlpha(event);" required/>
   														</div>
   												</div>
 
   												<br>
   													<div class="col-6 col-12-xsmall">
-  														<input type="email" name="email" id="email" value="" placeholder="Email" required/>
+  														<input type="email" name="email" id="email" value="" placeholder="Email" maxlength="25" style="box-sizing: border-box; border: 1px solid red; border-radius: 10px;" required/>
   													</div>
   													<br>
   													<div class="row gtr-uniform">
   														<div class="col-6">
-  															<input type="password" name="password" id="password" value="" placeholder="Password" required/>
+  															<input type="password" name="password" id="password" value="" placeholder="Password" maxlength="15" onkeypress="return validatePassword(event);" style="box-sizing: border-box; border: 1px solid red; border-radius: 10px;" required/>
   														</div>
   														<div class="col-6">
-  															<input type="password" name="confirm_password" id="confirm_password" value="" placeholder="Confirm Password" required/>
+  															<input type="password" name="confirm_password" id="confirm_password" value="" placeholder="Confirm Password" maxlength="15" onkeyup="equal();" onkeypress="return validatePassword(event);" style="box-sizing: border-box; border: 1px solid red; border-radius: 10px;" required/>
   														</div>
   													</div>
+                            <br>
+    												<div class="col-6 col-12-xsmall">
+    													<span id="msg"></span>
+    												</div>
 
   												</div>
 
   												<div class="col-2">
   													<div class="gtr-uniform">
   														<div class="col-12-xsmall">
-  															<img src="images/pro-img.png" alt="images/pro-img.png" style="width:100%; height:auto;">
+  															<img src="images/pro-img.png" alt="images/pro-img.png" style="width:100%; height:auto;" disabled>
   														</div>
   														<div class="col-12">
-  															<input type="submit" value="Upload Image" class="small" style="font-size:80%; height: auto; width: 100%"/>
+  															<input type="submit" value="Upload Image" class="small" style="font-size:80%; height: auto; width: 100%" disabled/>
   														</div>
   													</div>
   												</div>
@@ -133,7 +131,7 @@
   													<div class="row gtr-uniform">
 
   														<div class="col-12">
-  															<select name="state" id="state" required>
+  															<select name="state" id="state" style="box-sizing: border-box; border: 1px solid red; border-radius: 10px;" required>
   																<option value="">- States -</option>
   																<option value="1">Andra Pradesh</option>
   																<option value="2">Arunachal Pradesh</option>
@@ -168,178 +166,30 @@
   														</div>
 
   														<div class="col-6">
-  															<input type="text" name="district" id="district" value="" placeholder="District" required/>
+  															<input type="text" name="district" id="district" value="" placeholder="District" maxlength="50" style="box-sizing: border-box; border: 1px solid red; border-radius: 10px;" onkeypress="return isAlpha(event);" required/>
   														</div>
   														<div class="col-6">
-  															<input type="text" name="postoffice" id="postoffice" value="" placeholder="Postoffice" required/>
+  															<input type="text" name="postoffice" id="postoffice" value="" placeholder="Postoffice" maxlength="50" style="box-sizing: border-box; border: 1px solid red; border-radius: 10px;" onkeypress="return isAlpha(event);" required/>
   														</div>
   													</div>
   												</div>
 
   												<div class="col-12">
-  													<input type="text" name="address" id="address" value="" placeholder="Address" required/>
+  													<input type="text" name="address" id="address" value="" placeholder="Address" maxlength="500" style="box-sizing: border-box; border: 1px solid red; border-radius: 10px;" onkeypress="return isAlphaNumeric(event);" required/>
   												</div>
 
   												<div class="col-12">
   													<div class="row gtr-uniform">
   														<div class="col-6">
-  															<input type="text" name="pincode" id="pincode" value="" placeholder="Pincode" required/>
+  															<input type="text" name="pincode" id="pincode" value="" placeholder="Pincode" minlength="6" maxlength="6" value="<?php echo $js_row[8]; ?>" placeholder="Pincode" style="box-sizing: border-box; border: 1px solid red; border-radius: 10px;" onkeypress="return isNum(event);" required/>
   														</div>
   														<div class="col-6">
-  															<input type="text" name="phone" id="phone" value="" placeholder="Phone" required/>
+  															<input type="text" name="phone" id="phone" value="" placeholder="Phone" minlength="10" maxlength="11" style="box-sizing: border-box; border: 1px solid red; border-radius: 10px;" onkeypress="return isNum(event);" required/>
   														</div>
   													</div>
   												</div>
-
-  												<!--<div class="col-12">
-  													<ul class="actions">
-  														<li><button type="submit" class="primary" name="personal">Save</button></li>
-  														<li><button type="button" class="primary" name="next1" id="next1" onclick="activate(this.id)">Education</button></li>
-  													</ul>
-  												</div>-->
   											</div>
   									</section>
-
-  									<!-- refer for other pages
-
-                    <section id="educationdetails" class="main" disabled>
-
-  										<h2>EDUCATION DETAILS </h2>
-  										<form method="post" action="#">
-  										<fieldset id="f1" disabled>
-  											<div class="row gtr-uniform">
-  												<div class="col-12">
-  													<div class="row gtr-uniform">
-  														<div class="col-6">
-  															<select name="qualification1" id="qualification1" required>
-  																<option value="">- Qualification -</option>
-  																<option value="1">BCA</option>
-  																<option value="2">BSc Computer Science</option>
-  																<option value="3">BTech</option>
-  																<option value="4">MCA</option>
-  																<option value="5">MSc Computer Science</option>
-  																<option value="6">MTech</option>
-  															</select>
-  														</div>
-  														<div class="col-6">
-  															<input type="text" name="university" id="university" value="" placeholder="University" required/>
-  														</div>
-  													</div>
-  												</div>
-
-  												<div class="col-12">
-  													<div class="row gtr-uniform">
-  														<div class="col-6">
-  															<input type="text" name="institute" id="institute" value="" placeholder="Institute" required/>
-  														</div>
-  														<div class="col-6">
-  															<input type="text" name="cgpa" id="cgpa" value="" placeholder="CGPA/SGPA" required/>
-  														</div>
-  													</div>
-  												</div>
-
-
-
-  												<div class="col-12">
-  													<ul class="actions">
-  														<li><button type="submit" class="primary" name="education">Save</button></li>
-  														<li><button type="button" class="primary" name="more1" id="more1" onclick="activate(this.id)">More</button></li>
-  														<li><button type="button" class="primary" name="next1" id="next2" onclick="activate(this.id)">Projects</button></li>
-  													</ul>
-  												</div>
-  											</div>
-  										</fieldset>
-  										</form>
-
-  									</section>
-
-  									<section id="projectdetails" class="main" disabled>
-
-  										<h2>PROJECTS DETAILS </h2>
-  										<form method="post" action="#">
-  										<fieldset id="f2" disabled>
-  											<div class="row gtr-uniform">
-  												<div class="col-12">
-  													<div class="row gtr-uniform">
-  														<div class="col-6">
-  															<input type="text" name="pname" id="pname" value="" placeholder="Topic of the Project" required/>
-  														</div>
-  														<div class="col-6">
-  															<input type="text" name="technologies" id="technologies" value="" placeholder="Technologies Used" required/>
-  														</div>
-  													</div>
-  												</div>
-
-  												<div class="col-12">
-  													<textarea name="pdesciption" id="pdescription" placeholder="Description" rows="6" required></textarea>
-  												</div>
-
-
-
-  												<div class="col-12">
-  													<ul class="actions">
-  														<li><button type="submit" class="primary" name="project">Save</button></li>
-  														<li><button type="button" class="primary" name="more2" id="more2" onclick="activate(this.id)">More</button></li>
-  														<li><button type="button" class="primary" name="next3" id="next3" onclick="activate(this.id)">Experience</button></li>
-  													</ul>
-  												</div>
-  											</div>
-  										</fieldset>
-  										</form>
-
-  									</section>
-
-  									<section id="experiencedetails" class="main">
-
-  										<h2>EXPERIENCE DETAILS </h2>
-  										<form method="post" action="#">
-  										<fieldset id="f3" disabled>
-  											<div class="row gtr-uniform">
-  												<div class="col-12">
-  													<div class="row gtr-uniform">
-  														<div class="col-6">
-  															<input type="text" name="employer" id="employer" value="" placeholder="Employer" required/>
-  														</div>
-  														<div class="col-6">
-  															<input type="text" name="designation" id="designation" value="" placeholder="Designation" required/>
-  														</div>
-  													</div>
-  												</div>
-
-  												<div class="col-12">
-  													<div class="row gtr-uniform">
-  														<div class="col-45">
-  															<input type="date" name="jd" id="jd" value="2018-02-01" required/>
-  														</div>
-  														<div class="col-0010">
-  															<h5 style="text-align: center; margin-top:15px;">to</h5>
-  														</div>
-
-  														<div class="col-45">
-  															<input type="date" name="rd" id="rd" value="2018-02-01" required/>
-  														</div>
-  													</div>
-  												</div>
-
-  												<div class="col-12">
-  													<input type="text" name="tech" id="tech" value="" placeholder="Technologies Worked" required/>
-  												</div>
-
-
-
-  												<div class="col-12">
-  													<ul class="actions">
-  														<li><button type="submit" class="primary" name="project">Save</button></li>
-  														<li><button type="button" class="primary" name="more3" id="more3" onclick="activate(this.id)">More</button></li>
-  													</ul>
-  												</div>
-  											</div>
-  										</fieldset>
-
-
-  									</section>
-
-                  -->
 
   									<section id="finalsubmition" class="main">
 
@@ -423,3 +273,75 @@
 
 	</body>
 </html>
+
+<?php
+  /* Close db connection */
+  mysqli_close($con);
+?>
+
+<script type="text/javascript">
+  var specialKeys = new Array();
+  specialKeys.push(8); //Backspace
+  function isAlphaNumeric(e)
+	{
+    var keyCode = e.keyCode;
+    if((keyCode >= 48 && keyCode <= 57) || specialKeys.indexOf(keyCode) != -1 || (keyCode >= 65 && keyCode <= 90) || (keyCode >= 97 && keyCode <= 122))
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+  }
+  function isNum(e)
+	{
+    var keyCode = e.keyCode;
+    if((keyCode >= 48 && keyCode <= 57))
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+  }
+	function isAlpha(e)
+	{
+    var keyCode = e.keyCode;
+    if(specialKeys.indexOf(keyCode) != -1 || (keyCode >= 65 && keyCode <= 90) || (keyCode >= 97 && keyCode <= 122) || keyCode==32)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+  }
+  function validatePassword(e)
+	{
+    var keyCode = e.keyCode;
+    if((keyCode >= 48 && keyCode <= 57) || specialKeys.indexOf(keyCode) != -1 || (keyCode >= 65 && keyCode <= 90) || (keyCode >= 97 && keyCode <= 122) || keyCode == 64)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+  }
+
+	function equal()
+	{
+		if(document.getElementById('password').value == document.getElementById('confirm_password').value)
+		{
+			document.getElementById('msg').style.color = 'green';
+			document.getElementById('msg').innerHTML = 'Matching';
+		}
+		else
+		{
+			document.getElementById('msg').style.color = 'red';
+			document.getElementById('msg').innerHTML = 'Passwords not matching';
+		}
+	}
+</script>

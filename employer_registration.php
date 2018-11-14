@@ -15,6 +15,19 @@
 
 	$res=$db->employerReg($cname,$cin,$location,$email,$phone,$category,$website,$description,$password);
 
+	if($res>0)
+	{
+		echo '<script language="javascript">';
+		echo 'alert("Successfully Inserted.")';
+		echo '</script>';
+	}
+	else
+	{
+		echo '<script language="javascript">';
+		echo 'alert("Error!")';
+		echo '</script>';
+	}
+
 	/* Show employer's home page */
 	// res contins the number of affected rows . res==0 means no rows affected
 	$res>0?header('location:login.php'):header('location:employer_registration.html');

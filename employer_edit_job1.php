@@ -7,12 +7,6 @@
   $db=mysqli_select_db($con,"jobroot")or die('Error connecting to MySQL table.');
   $email=$_SESSION['email'];
 
-  /* Load values into select box */
-
-  $sql="select job_id,title from jobs where empid=(select empid from employer where email='".$email."')";
-  $job_id=mysqli_query($con,$sql) or die('Error in the sql query1');
-
-
 ?>
 
 <?php
@@ -27,26 +21,10 @@
 							<section id="intro" class="main">
 								<form method="post" action="#">
 									<div class="row gtr-uniform">
-										<div class="col-12">
-                      <select name="jobid" onchange="this.form.submit()">
-                        <option selected="selected" disabled="disabled" style="background-color:#f2efef"><font color="#000000"><i>-Select Job Title-</i></font></option>
-                        <?php
-                          while($row = mysqli_fetch_array($job_id))
-                          {
-                            echo '<option value="' . $row['job_id'] . '">' . $row['title'] . '</option>';
-                          }
-                        ?>
-											</select>
-                    </div>
                       <?php
+                          /* Load values into form */
 
-                        /* Load values into form upon change in select */
-
-                        if(isset($_POST["jobid"]))
-                        {
-                          /* Load values into form upon change in select */
-
-                          $jobid=$_POST['jobid'];
+                          $jobid=$_SESSION['job_id'];
                           $sql="select * from jobs where job_id='".$jobid."'";
                           $job=mysqli_query($con,$sql) or die('Error in the sql query2');
                           $job_row=mysqli_fetch_row($job);
@@ -107,7 +85,7 @@
                               echo '</ul>';
                             echo '</div>';
                           echo '</div>';
-                        }
+
 
                         /* Update Table */
 
@@ -164,6 +142,7 @@
                      	 			echo '</script>';
                      	 		}
                         }
+
                       ?>
                     </div>
                   </form>
@@ -194,23 +173,5 @@
 		{
 			return false;
 		}
-  }
-
-  window.onload = validateDate();
-
-  function validateDate()
-  {
-    var d = new Date(),
-    month = '' + (d.getMonth() + 1),
-    day = '' + d.getDate(),
-    year = d.getFullYear();
-
-    if (month.length < 2) month = '0' + month;
-    if (day.length < 2) day = '0' + day;
-
-    dt = [year, month, day].join('-');
-
-    document.getElementById('deadline').min = dt;
-    document.getElementById('deadline').value = dt;
   }
 </script>
